@@ -1,0 +1,22 @@
+.contactList {
+  padding: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.contactBlock {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+.nubmer {
+  color: rgb(88, 88, 88);
+  font-size: 12px;
+}
+.contactItem {
+  display: flex;
+}
+.deleteBotton {
+  margin-left: 20px;
+  width: 100px;
+  height: 40px;
+}

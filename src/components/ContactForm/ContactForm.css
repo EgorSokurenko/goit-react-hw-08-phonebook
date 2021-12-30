@@ -1,0 +1,35 @@
+.contactForm {
+  display: inline-block;
+  border: 3px solid rgb(67, 159, 235);
+  border-radius: 3px;
+  padding: 10px;
+}
+.form__label {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  color: rgb(119, 119, 119);
+}
+.form__input {
+  margin-top: 10px;
+  padding: 4px;
+  outline: none;
+}
+.form__input:focus {
+  border: 1px solid rgb(67, 159, 235);
+}
+.form__input::placeholder {
+  font-size: 12px;
+}
+.form__button {
+  display: block;
+  margin: 0 auto;
+  padding: 5px 10px;
+  border: none;
+  background-color: rgb(130, 189, 236);
+  box-shadow: 1px 2px 3px rgba(95, 95, 95, 0.411);
+}
+.form__button:active {
+  border: 1px solid black;
+  box-shadow: 2px 3px 4px rgba(95, 95, 95, 0.411);
+}
