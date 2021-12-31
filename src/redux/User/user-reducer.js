@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { register, login, logout } from "./user-operations";
+import { register, login, logout, current } from "./user-operations";
 const initialState = {
   user: { name: null, email: null },
   token: null,
@@ -15,5 +15,19 @@ export const user = createReducer(initialState, {
   },
   [logout.fulfilled]: () => {
     return initialState;
+  },
+  [current.fulfilled]: (state, { payload }) => {
+    if (!payload) {
+      return initialState;
+    }
+    const normUser = {
+      ...state,
+      user: { ...payload },
+      isLoggedIn: true,
+    };
+    return normUser;
+  },
+  [current.pending]: (state, { payload }) => {
+    return { ...state, isLoggedIn: "pending" };
   },
 });

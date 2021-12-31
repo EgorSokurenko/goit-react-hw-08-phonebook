@@ -1,3 +1,4 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   addContactRequest,
   addContactSuccess,
@@ -14,16 +15,16 @@ const axios = require("axios");
 export const asyncGetContact = () => async (dispatch) => {
   dispatch(getContactRequest());
   axios
-    .get("https://61bc594cd8542f00178246b9.mockapi.io/contacts/contacts")
+    .get("https://connections-api.herokuapp.com/contacts")
     .then((response) => dispatch(getContactSuccess(response.data)))
     .catch((error) => dispatch(getContactError(error)));
 };
-export const asyncAddContact = (name, phone) => async (dispatch) => {
+export const asyncAddContact = (name, number) => async (dispatch) => {
   dispatch(addContactRequest());
-  const newContact = { name, phone };
+  const newContact = { name, number };
   try {
     const addContact = await axios.post(
-      "https://61bc594cd8542f00178246b9.mockapi.io/contacts/contacts",
+      "https://connections-api.herokuapp.com/contacts",
       newContact
     );
     dispatch(addContactSuccess(addContact.data));
@@ -36,13 +37,29 @@ export const asyncDeleteContact = (id) => async (dispatch) => {
   dispatch(deleteContactRequest);
   try {
     const deleteContact = await axios.delete(
-      `https://61bc594cd8542f00178246b9.mockapi.io/contacts/contacts/${id}`
+      `https://connections-api.herokuapp.com/contacts/${id}`
     );
     const newContact = await axios.get(
-      "https://61bc594cd8542f00178246b9.mockapi.io/contacts/contacts"
+      "https://connections-api.herokuapp.com/contacts"
     );
     dispatch(deleteContactSuccess(newContact.data));
   } catch (error) {
     dispatch(deleteContactError(error));
   }
 };
+export const asyncChangeContact = createAsyncThunk(
+  "contacts/changeContact",
+  async ({ id, contact }) => {
+    try {
+      console.log(contact);
+      const { data } = await axios.patch(
+        `https://connections-api.herokuapp.com/contacts/${id}`,
+        contact
+      );
+      const newContact = await axios.get(
+        "https://connections-api.herokuapp.com/contacts"
+      );
+      return newContact.data;
+    } catch {}
+  }
+);

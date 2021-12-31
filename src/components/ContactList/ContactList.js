@@ -1,13 +1,17 @@
 import "./ContactList.css";
-
+import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import {
   asyncDeleteContact,
   asyncGetContact,
+  asyncChangeContact,
 } from "../../redux/Contact/contact-operation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function ContactList() {
+  const [id, setId] = useState("");
+  const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
   const contacts = useSelector((state) => state.items);
   const isLoading = useSelector((state) => state.isLoading);
   const filter = useSelector((state) => state.filter);
@@ -19,6 +23,29 @@ export default function ContactList() {
     );
   }
 
+  const handleChange = (e) => {
+    const { name, value } = e.currentTarget;
+    switch (name) {
+      case "name":
+        setName(value);
+        break;
+      case "number":
+        setNumber(value);
+        break;
+      default:
+        break;
+    }
+  };
+  const onChange = (id, name, number) => {
+    setId(id);
+    setName(name);
+    setNumber(number);
+  };
+  const changeSubmit = (e) => {
+    e.preventDefault();
+    dispatch(asyncChangeContact({ id, contact: { name, number } }));
+    setId(null);
+  };
   useEffect(() => {
     dispatch(asyncGetContact());
   }, [dispatch]);
@@ -32,18 +59,46 @@ export default function ContactList() {
               <li className="contactItem" key={contact.id}>
                 <div className="contactBlock">
                   <span>{contact.name}</span>
-                  <span className="nubmer">{contact.phone}</span>
-                </div>
+                  <span className="nubmer">{contact.number}</span>
+                  <Button
+                    onClick={() =>
+                      onChange(contact.id, contact.name, contact.number)
+                    }
+                    variant="outline-success"
+                  >
+                    Change
+                  </Button>
+                  {id === contact.id && (
+                    <form onSubmit={changeSubmit}>
+                      <input
+                        onChange={handleChange}
+                        value={name}
+                        type="text"
+                        name="name"
+                        required
+                      />
+                      <input
+                        onChange={handleChange}
+                        value={number}
+                        type="tel"
+                        name="number"
+                        required
+                      />{" "}
+                      <br />
+                      <button type="submit">Отправить</button>
+                    </form>
+                  )}
 
-                <button
-                  className="deleteBotton"
-                  onClick={() => {
-                    dispatch(asyncDeleteContact(contact.id));
-                  }}
-                  type="button"
-                >
-                  Delete
-                </button>
+                  <br />
+                  <Button
+                    onClick={() => {
+                      dispatch(asyncDeleteContact(contact.id));
+                    }}
+                    variant="danger"
+                  >
+                    Delete
+                  </Button>
+                </div>
               </li>
             );
           })}

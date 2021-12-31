@@ -6,7 +6,7 @@ import { asyncAddContact } from "../../redux/Contact/contact-operation";
 export default function ContactForm() {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
-  const contacts = useSelector((state) => state.itemsт);
+  const contacts = useSelector((state) => state.items);
   const dispatch = useDispatch();
   const handleChange = (e) => {
     const { name, value } = e.currentTarget;

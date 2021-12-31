@@ -10,13 +10,15 @@ import {
   getContactSuccess,
   getContactError,
 } from "./contact-action";
+import { asyncChangeContact } from "./contact-operation";
 
-const ContactState = null;
+const ContactState = [];
 
 export const contacts = createReducer(ContactState, {
   [getContactSuccess]: (state, { payload }) => payload,
   [addContactSuccess]: (state, { payload }) => [...state, payload],
   [deleteContactSuccess]: (state, { payload }) => payload,
+  [asyncChangeContact.fulfilled]: (state, { payload }) => payload,
 });
 export const isLoading = createReducer(false, {
   [addContactRequest]: () => true,

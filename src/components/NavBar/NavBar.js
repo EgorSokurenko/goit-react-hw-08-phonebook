@@ -17,7 +17,7 @@ export default function NavBar() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="">
-                <NavLink to="/">Home</NavLink>
+                <NavLink to="/add-form">Form-Creator</NavLink>
               </Nav.Link>
               <Nav.Link href="">
                 <NavLink to="/contacts">Contacts</NavLink>
@@ -36,7 +36,7 @@ export default function NavBar() {
             </Nav>
             {isLoggedIn && (
               <Nav>
-                <Nav.Link href="#deets">Hi, {user.name}!</Nav.Link>
+                <Nav.Link href="">Hi, {user.name}!</Nav.Link>
                 <Button onClick={HandleClick} variant="primary">
                   Logout
                 </Button>
