@@ -23,7 +23,7 @@ export default function App() {
   return (
     <>
       {isLoggedIn === "pending" ? (
-        <>LOX</>
+        <>Skeleton</>
       ) : (
         <div>
           <NavBar />
@@ -38,7 +38,7 @@ export default function App() {
                   </PublicRoute>
                 }
               />
-              {isLoggedIn !== true ? (
+              {isLoggedIn === "pending" ? (
                 <>loading</>
               ) : (
                 <Route
@@ -50,7 +50,7 @@ export default function App() {
                   }
                 />
               )}
-              {isLoggedIn !== true ? (
+              {isLoggedIn === "pending" ? (
                 <>load</>
               ) : (
                 <Route

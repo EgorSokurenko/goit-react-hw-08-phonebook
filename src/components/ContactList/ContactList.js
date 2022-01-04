@@ -36,8 +36,12 @@ export default function ContactList() {
         break;
     }
   };
-  const onChange = (id, name, number) => {
-    setId(id);
+  const onChange = (changeId, name, number) => {
+    if (id === changeId) {
+      setId("");
+      return;
+    }
+    setId(changeId);
     setName(name);
     setNumber(number);
   };

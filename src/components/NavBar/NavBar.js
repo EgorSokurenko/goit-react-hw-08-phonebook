@@ -17,11 +17,19 @@ export default function NavBar() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="">
-                <NavLink to="/add-form">Form-Creator</NavLink>
+                <NavLink to="/">Home</NavLink>
               </Nav.Link>
-              <Nav.Link href="">
-                <NavLink to="/contacts">Contacts</NavLink>
-              </Nav.Link>
+              {isLoggedIn && (
+                <>
+                  <Nav.Link href="">
+                    <NavLink to="/add-form">Form-Creator</NavLink>
+                  </Nav.Link>
+                  <Nav.Link href="">
+                    <NavLink to="/contacts">Contacts</NavLink>
+                  </Nav.Link>
+                </>
+              )}
+
               {!isLoggedIn && (
                 <NavDropdown title="Log/Reg" id="basic-nav-dropdown">
                   <NavDropdown.Item href="">

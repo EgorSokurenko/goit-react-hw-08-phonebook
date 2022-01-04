@@ -29,7 +29,7 @@ export const login = createAsyncThunk("user/LogIn", async (user) => {
     token.set(data.token);
     return data;
   } catch (error) {
-    // Fix
+    return error;
   }
 });
 export const logout = createAsyncThunk("user/LogOut", async () => {
@@ -40,7 +40,7 @@ export const logout = createAsyncThunk("user/LogOut", async () => {
     token.unset();
     return;
   } catch (error) {
-    // Fix
+    return error;
   }
 });
 export const current = createAsyncThunk("user/Get", async (_, thunkApi) => {
@@ -59,7 +59,7 @@ export const current = createAsyncThunk("user/Get", async (_, thunkApi) => {
       );
       return data;
     } catch (error) {
-      // fix
+      return error;
     }
   }
 });

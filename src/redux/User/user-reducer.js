@@ -31,3 +31,9 @@ export const user = createReducer(initialState, {
     return { ...state, isLoggedIn: "pending" };
   },
 });
+export const userError = createReducer(null, {
+  [register.rejected]: (_, payload) => `RegisterError: ${payload}`,
+  [login.rejected]: (_, payload) => `LoginError: ${payload}`,
+  [logout.rejected]: (_, payload) => `LogoutError: ${payload}`,
+  [current.pending]: (_, payload) => `CurrentError: ${payload}`,
+});
