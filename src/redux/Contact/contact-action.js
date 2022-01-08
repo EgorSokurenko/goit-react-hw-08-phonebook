@@ -15,3 +15,7 @@ export const deleteContactSuccess = createAction(
   "contacts/deleteContactsSuccess"
 );
 export const deleteContactError = createAction("contacts/deleteContactsError");
+
+// Delete contact in state
+
+export const logOutContcatSuccess = createAction("contacts/logOut");

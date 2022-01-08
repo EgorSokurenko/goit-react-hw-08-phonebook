@@ -49,7 +49,7 @@ export const asyncDeleteContact = (id) => async (dispatch) => {
 };
 export const asyncChangeContact = createAsyncThunk(
   "contacts/changeContact",
-  async ({ id, contact }) => {
+  async ({ id, contact }, thunkApi) => {
     try {
       console.log(contact);
       const { data } = await axios.patch(
@@ -60,6 +60,9 @@ export const asyncChangeContact = createAsyncThunk(
         "https://connections-api.herokuapp.com/contacts"
       );
       return newContact.data;
-    } catch {}
+    } catch (error) {
+      alert("Error");
+      return thunkApi.rejectWithValue(error);
+    }
   }
 );

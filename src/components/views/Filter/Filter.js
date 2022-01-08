@@ -1,8 +1,9 @@
 import propTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
-import * as actions from "../../redux/Filter/filter-action";
+import * as actions from "../../../redux/Filter/filter-action";
+import { getFilter } from "../../../redux/Contact/contact-selectors";
 export default function Filter() {
-  const value = useSelector((state) => state.filter);
+  const value = useSelector(getFilter);
   const dispatch = useDispatch();
   const handleFilter = (e) => {
     dispatch(actions.onFilter(e.target.value));

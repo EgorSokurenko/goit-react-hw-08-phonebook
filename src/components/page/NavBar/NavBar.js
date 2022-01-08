@@ -1,7 +1,8 @@
 import { Navbar, Container, Nav, NavDropdown, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
-import { logout } from "../../redux/User/user-operations";
+import { logout } from "../../../redux/User/user-operations";
+
 export default function NavBar() {
   const { user, isLoggedIn } = useSelector((state) => state.user);
   const dispatch = useDispatch();

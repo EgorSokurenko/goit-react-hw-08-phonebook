@@ -5,16 +5,21 @@ import {
   asyncDeleteContact,
   asyncGetContact,
   asyncChangeContact,
-} from "../../redux/Contact/contact-operation";
+} from "../../../redux/Contact/contact-operation";
+import {
+  getItems,
+  isContactsLoading,
+  getFilter,
+} from "../../../redux/Contact/contact-selectors";
 import { useEffect, useState } from "react";
 
 export default function ContactList() {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
-  const contacts = useSelector((state) => state.items);
-  const isLoading = useSelector((state) => state.isLoading);
-  const filter = useSelector((state) => state.filter);
+  const contacts = useSelector(getItems);
+  const isLoading = useSelector(isContactsLoading);
+  const filter = useSelector(getFilter);
   const dispatch = useDispatch();
   let visibleContacts = [];
   if (contacts) {

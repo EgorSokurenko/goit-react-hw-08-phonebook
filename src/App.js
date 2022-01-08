@@ -3,19 +3,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { Routes, Route, Link } from "react-router-dom";
 import PrivateRoute from "./components/UserMenu/PrivateRoute";
 import PublicRoute from "./components/UserMenu/PublicRouter";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/page/NavBar";
 import { current } from "./redux/User/user-operations";
-const ContactForm = lazy(() => import("./components/ContactForm"));
-const Filter = lazy(() => import("./components/Filter/"));
-const ContactList = lazy(() => import("./components/ContactList/"));
+import { isUserLoggedIn } from "./redux/User/user-selectors";
+const ContactForm = lazy(() => import("./components/page/ContactForm"));
+const Filter = lazy(() => import("./components/views/Filter/"));
+const ContactList = lazy(() => import("./components/page/ContactList/"));
 const RegisterForm = lazy(() =>
-  import("./components/RegisterForm/RegisterForm")
+  import("./components/views/RegisterForm/RegisterForm")
 );
-const LoginForm = lazy(() => import("./components/LoginForm/LoginForm"));
-const HomeView = lazy(() => import("./components/HomeView/HomeView"));
+const LoginForm = lazy(() => import("./components/views/LoginForm/LoginForm"));
+const HomeView = lazy(() => import("./components/page/HomeView/HomeView"));
 
 export default function App() {
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const isLoggedIn = useSelector(isUserLoggedIn);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(current());
@@ -77,7 +78,7 @@ export default function App() {
                 exact
                 path="/login"
                 element={
-                  <PublicRoute restricted>
+                  <PublicRoute redirectTo="/contacts" restricted>
                     <LoginForm />
                   </PublicRoute>
                 }

@@ -3,7 +3,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { contacts, error, isLoading } from "./Contact/contact-reducer";
 import filter from "./Filter/filter-reducer";
-import { user } from "./User/user-reducer";
+import { user, userError } from "./User/user-reducer";
 
 const authPersistConfig = {
   key: "auth",
@@ -15,8 +15,9 @@ const rootReducer = combineReducers({
   user: userStore,
   items: contacts,
   isLoading,
-  error,
+  contactError: error,
   filter: filter,
+  userError,
 });
 
 export const store = configureStore({

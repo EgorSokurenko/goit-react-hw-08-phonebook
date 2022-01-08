@@ -30,10 +30,23 @@ export const user = createReducer(initialState, {
   [current.pending]: (state, { payload }) => {
     return { ...state, isLoggedIn: "pending" };
   },
+  [logout.pending]: (state, { payload }) => {
+    return { ...state, isLoggedIn: "pending" };
+  },
+  [login.pending]: (state, { payload }) => {
+    return { ...state, isLoggedIn: "pending" };
+  },
+  [register.pending]: (state, { payload }) => {
+    return { ...state, isLoggedIn: "pending" };
+  },
 });
 export const userError = createReducer(null, {
-  [register.rejected]: (_, payload) => `RegisterError: ${payload}`,
-  [login.rejected]: (_, payload) => `LoginError: ${payload}`,
-  [logout.rejected]: (_, payload) => `LogoutError: ${payload}`,
-  [current.pending]: (_, payload) => `CurrentError: ${payload}`,
+  [register.rejected]: (_, payload) => `RegisterError: ${payload.message}`,
+  [login.rejected]: (_, payload) => `LoginError: ${payload.message}`,
+  [logout.rejected]: (_, payload) => `LogoutError: ${payload.message}`,
+  [current.rejected]: (_, payload) => `CurrentError: ${payload.message}`,
+  [register.pending]: (_, payload) => `RegisterError: ${payload.message}`,
+  [login.pending]: () => null,
+  [logout.pending]: () => null,
+  [current.pending]: () => null,
 });

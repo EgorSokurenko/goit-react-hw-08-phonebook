@@ -2,11 +2,12 @@ import { useState } from "react";
 import propTypes from "prop-types";
 import "./ContactForm.css";
 import { useDispatch, useSelector } from "react-redux";
-import { asyncAddContact } from "../../redux/Contact/contact-operation";
+import { asyncAddContact } from "../../../redux/Contact/contact-operation";
+import { getItems } from "../../../redux/Contact/contact-selectors";
 export default function ContactForm() {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
-  const contacts = useSelector((state) => state.items);
+  const contacts = useSelector(getItems);
   const dispatch = useDispatch();
   const handleChange = (e) => {
     const { name, value } = e.currentTarget;
